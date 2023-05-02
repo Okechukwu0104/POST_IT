@@ -7,16 +7,21 @@ const userSchema = new Schema(
       type: String,
       require: [true, "username is required"],
     },
-    firstname: {
-      type: String,
-      minlength: 3,
-      maxlength: 30,
-    },
-
     email: {
       type: String,
+      required: true,
       unique: true,
     },
+    password: {
+      type: String,
+      required: true,
+    },
+    posts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Post',
+    },
+    ],
   },
   {
     timestamps: true,
@@ -25,4 +30,4 @@ const userSchema = new Schema(
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;
-// add lastname and passwords schema 
+
