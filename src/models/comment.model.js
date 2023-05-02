@@ -3,9 +3,11 @@ const Schema = mongoose.Schema;
 
 const commentSchema = new Schema(
   {
-    commentId: {
-      type: String,
+    postId: {
+      type: Schema.Types.ObjectId,
       require: true,
+      ref: "Post",
+
     },
     body: {
       type: String,
@@ -21,6 +23,6 @@ const commentSchema = new Schema(
   }
 );
 
-commentSchema.set("toJSON", { virtuals: true });
 
-module.exports = mongoose.model("Comment", messageSchema);
+const Comment = mongoose.model("Comment", messageSchema);
+module.exports = Comment;
