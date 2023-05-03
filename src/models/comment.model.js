@@ -1,28 +1,25 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
 
-const commentSchema = new Schema(
-  {
-    postId: {
-      type: Schema.Types.ObjectId,
-      require: true,
-      ref: "Post",
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
-    },
-    body: {
-      type: String,
-      required: true,
-    },
-    author: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
+const commentSchema = new Schema({
+  content: {
+    type: String,
+    required: true,
   },
-  {
-    timestamps: true, // Saves createdAt and updatedAt as dates. createdAt will be our timestamp.
-  }
-);
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  post: {
+    type: Schema.Types.ObjectId,
+    ref: 'Post',
+    required: true,
+  },
+});
+
+const Comment = mongoose.model('Comment', commentSchema);
 
 
-const Comment = mongoose.model("Comment", messageSchema);
 module.exports = Comment;
