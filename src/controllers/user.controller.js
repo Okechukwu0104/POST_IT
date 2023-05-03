@@ -10,12 +10,12 @@ const {
 exports.signup = async (req, res) => {
   try {
     const {
-      name,
+      username,
       email,
       password
     } = req.body;
     console.log(req.body);
-    if (!name) {
+    if (!username) {
       return res.status(400).json({
         status: 'error',
         error: 'name is required'

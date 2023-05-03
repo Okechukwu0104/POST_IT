@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 });
 
 //error handlers
-app.use(handler);
 app.use("/api", router)
+app.use(handler);
 
 module.exports = app;
