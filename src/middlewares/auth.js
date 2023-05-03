@@ -1,7 +1,4 @@
-const {
-    decodeToken
-  } = require('../services/jwt');
-  const User = require("../models/user");
+ const User = require("../models/user");
   
   module.exports.protect = async (req, res, next) => {
     // get the token

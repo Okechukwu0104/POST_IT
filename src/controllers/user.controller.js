@@ -1,13 +1,7 @@
 const User = require('../models/user.model');
-const {
-  hashPassword,
-  verifyPassword
-} = require('../services/bcrypt');
-const {
-  signToken
-} = require('../services/jwt');
+const bcrypt = require('bcrypt');
 
-exports.signup = async (req, res) => {
+exports.registerUser = async (req, res) => {
   try {
     const {
       name,
@@ -111,5 +105,56 @@ exports.login = async (req, res, next) => {
       status: 'error',
       error: error.message
     });
+  }
+};
+
+// user profile
+exports.getuserProfile = async (req, res) => {
+  res.send(req.user);
+};
+//update user profile 
+exports.updateProfile = async (req, res) => {
+  const { id } = req.params;
+  const { name, email } = req.body;
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      id, // user ID to update
+      { name, email }, // updated name and email
+      { new: true } // return the updated user object
+    );
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// reset password 
+exports.resetPassword = async (req, res) => {
+  const userId = req.params.id;
+  const oldPassword = req.body.oldPassword;
+  const newPassword = req.body.newPassword;
+
+  try {
+    // Find user by ID
+    const user = await User.findById(userId);
+
+    // Compare old password with stored hashed password
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Invalid old password' });
+    }
+
+    // Hash and save new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+    await user.save();
+
+    res.status(200).json({ message: 'Password updated succesfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' })
   }
 };
