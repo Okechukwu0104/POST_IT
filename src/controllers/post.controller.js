@@ -1,48 +1,3 @@
-
-const register = async function (req, res) {
-  try {
-
-  } catch (error) {
-    throw new Error(`Error registering a user: ${error.message}`);
-  }
-};
-const getAllUsers = async function (req, res) {
-  try {
-
-  } catch (error) {
-    throw new Error(`Error getting all users: ${error.message}`);
-  }
-};
-const deleteAllUsers = async function (req, res) {
-  try {
-
-  } catch (error) {
-    throw new Error(`Error deleting all users: ${error.message}`);
-  }
-};
-
-const getUserById = async function (req, res) {
-  try {
-
-  } catch (error) {
-    throw new Error(`Error getting a user by id: ${error.message}`);
-  }
-};
-
-const updateUserById = async function (req, res) {
-  try {
-
-  } catch (error) {
-    throw new Error(`Error updating a user by id: ${error.message}`);
-  }
-};
-const deleteUserById = async function (req, res) {
-  try {
-
-  } catch (error) {
-    throw new Error(`Error deleting a user by id: ${error.message}`);
-  }
-};
 const createPost = async function (req, res) {
   try {
 
@@ -50,6 +5,8 @@ const createPost = async function (req, res) {
     throw new Error(`Error creating a post: ${error.message}`);
   }
 };
+
+
 const getAllPosts = async function (req, res) {
   try {
 
@@ -57,6 +14,8 @@ const getAllPosts = async function (req, res) {
     throw new Error(`Error getting all posts: ${error.message}`);
   }
 };
+
+
 const deleteAllPosts = async function (req, res) {
   try {
 
@@ -65,21 +24,24 @@ const deleteAllPosts = async function (req, res) {
   }
 };
 
+
 const getPostById = async function (req, res) {
   try {
 
   } catch (error) {
-    throw new Error(`Error getting post by id: ${error.message}`);
+    throw new Error(`Error getting a post by id: ${error.message}`);
   }
 };
 
-const udpadePostById = async function (req, res) {
+
+const updatePostById = async function (req, res) {
   try {
 
   } catch (error) {
     throw new Error(`Error updating post by id: ${error.message}`);
   }
 };
+
 
 const deletePostById = async function (req, res) {
   try {
@@ -89,6 +51,7 @@ const deletePostById = async function (req, res) {
   }
 };
 
+
 const createComment = async function (req, res) {
   try {
 
@@ -96,6 +59,7 @@ const createComment = async function (req, res) {
     throw new Error(`Error creating a comment: ${error.message}`);
   }
 };
+
 
 const getAllComments = async function (req, res) {
   try {
@@ -105,6 +69,7 @@ const getAllComments = async function (req, res) {
   }
 };
 
+
 const deleteAllComments = async function (req, res) {
   try {
 
@@ -113,13 +78,15 @@ const deleteAllComments = async function (req, res) {
   }
 };
 
+
 const getCommentById = async function (req, res) {
   try {
 
   } catch (error) {
-    throw new Error(`Error getting comment by id: ${error.message}`);
+    throw new Error(`Error getting a comment by id: ${error.message}`);
   }
 };
+
 
 const updateCommentById = async function (req, res) {
   try {
@@ -128,6 +95,8 @@ const updateCommentById = async function (req, res) {
     throw new Error(`Error updating comment by id: ${error.message}`);
   }
 };
+
+
 
 const deleteCommentById = async function (req, res) {
   try {
@@ -139,17 +108,11 @@ const deleteCommentById = async function (req, res) {
 
 
 module.exports = {
-  register,
-  getAllUsers,
-  deleteAllUsers,
-  getUserById,
-  updateUserById,
-  deleteUserById,
   createPost,
   getAllPosts,
   deleteAllPosts,
   getPostById,
-  udpadePostById,
+  updatePostById,
   deletePostById,
   createComment,
   getAllComments,
@@ -157,4 +120,4 @@ module.exports = {
   getCommentById,
   updateCommentById,
   deleteCommentById,
-};
+}

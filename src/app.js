@@ -1,5 +1,5 @@
 const express = require("express");
-const{handler} = require('./errors');
+const{handler, error404} = require('./errors');
 const app = express();
 const router = require("./routes/user.route");
 
@@ -24,7 +24,8 @@ app.use((req, res, next) => {
 });
 
 //error handlers
+app.use("/api", router);
+app.use("*", error404);
 app.use(handler);
-app.use("/api", router)
 
 module.exports = app;

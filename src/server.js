@@ -3,6 +3,7 @@ const { env, db } = require("./configs");
 
 const MONGO_URL = env.dbUrl;
 const port = env.port || 8000;
+
 //create our server using async
 const start = async () => {
   try {
@@ -16,4 +17,5 @@ const start = async () => {
     console.error(error.message);
   }
 };
+
 start();

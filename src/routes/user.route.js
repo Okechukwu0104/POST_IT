@@ -1,24 +1,30 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/user.model");
+const { user } = require('../controllers')
 
-router.post("/User", async (req, res) => {
-  const newUser = {
-    username: req.body.username,
-    firstname: req.body.firstname,
-    email: req.body.email,
-  };
+router.post("/users", user.register);
+router.get("/users", user.getAllUsers);
+router.delete("/users", user.deleteAllUsers);
 
-  const user = new User(newUser);
-  user.save();
+router.get("/users/:userId", user.getUserById);
+router.put("/users/:userId", user.updateUserById);
+router.delete("/users/:userId", user.deleteUserById);
 
-  return res.status(201).json({
-    success: true,
-    user,
-  });
-  try {
-  } catch (error) {
-    throw new error(`error creating a user ${error.message}`);
-  }
-});
+router.post("/users/:userId/posts", user.createPost);
+router.get("/users/:userId/posts", user.getAllPosts);
+router.delete("/users/:userId/posts", user.deleteAllPosts);
+
+router.get("/users/:userId/posts/:postId", user.getPostById);
+router.put("/users/:userId/posts/:postId", user.udpadePostById);
+router.delete("/users/:userId/posts/:postId", user.deletePostById);
+
+router.post("/users/:userId/comments", user.createComment);
+router.get("/users/:userId/comments", user.getAllComments);
+router.delete("/users/:userId/comments", user.deleteAllComments);
+
+router.get("/users/:userId/comments/:commentId", user.getCommentById);
+router.put("/users/:userId/comments/:commentId", user.updateCommentById);
+router.delete("/users/:userId/comments/:commentId", user.deleteCommentById);
+
+
 module.exports = router;

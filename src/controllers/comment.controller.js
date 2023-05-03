@@ -1,82 +1,53 @@
-const Comments = require("../models/commentModel");
-const Posts = require("../models/postModel");
 
-const commentcont = {
-  postComment: async (req, res) => {
-    try {
-      const { postId, content, tag, reply, postUserId } = req.body;
 
-      const post = await Posts.findById(postId);
-      if (!post)
-        return res.status(400).json({ msg: "This post does not exist." });
+const createComment = async function (req, res) {
+  try {
 
-      if (reply) {
-        const cm = await Comments.findById(reply);
-        if (!cm)
-          return res.status(400).json({ msg: "This comment does not exist." });
-      }
+  } catch (error) {
+    throw new Error(`Error creating comment: ${error.message}`);
+  }
+};
+const getAllComments = async function (req, res) {
+  try {
 
-      const newComment = new Comments({
-        user: req.user._id,
-        content,
-        tag,
-        reply,
-        postUserId,
-        postId,
-      });
+  } catch (error) {
+    throw new Error(`Error getting all comments: ${error.message}`);
+  }
+};
+const deleteAllComments = async function (req, res) {
+  try {
 
-      await Posts.findOneAndUpdate(
-        { _id: postId },
-        {
-          $push: { comments: newComment._id },
-        },
-        { new: true }
-      );
+  } catch (error) {
+    throw new Error(`Error deleting all comments: ${error.message}`);
+  }
+};
+const getCommentById = async function (req, res) {
+  try {
 
-      await newComment.save();
+  } catch (error) {
+    throw new Error(`Error getting comment by id: ${error.message}`);
+  }
+};
+const updateComment = async function (req, res) {
+  try {
 
-      res.json({ newComment });
-    } catch (err) {
-      return res.status(500).json({ msg: err.message });
-    }
-  },
-  putComment: async (req, res) => {
-    try {
-      const { content } = req.body;
+  } catch (error) {
+    throw new Error(`Error updating comment by id: ${error.message}`);
+  }
+};
+const deleteCommentById = async function (req, res) {
+  try {
 
-      await Comments.findOneAndUpdate(
-        {
-          _id: req.params.id,
-          user: req.user._id,
-        },
-        { content }
-      );
-
-      res.json({ msg: "Update Success!" });
-    } catch (err) {
-      return res.status(500).json({ msg: err.message });
-    }
-  },
-
-  deleteComment: async (req, res) => {
-    try {
-      const comment = await Comments.findOneAndDelete({
-        _id: req.params.id,
-        $or: [{ user: req.user._id }, { postUserId: req.user._id }],
-      });
-
-      await Posts.findOneAndUpdate(
-        { _id: comment.postId },
-        {
-          $pull: { comments: req.params.id },
-        }
-      );
-
-      res.json({ msg: "Deleted Comment!" });
-    } catch (err) {
-      return res.status(500).json({ msg: err.message });
-    }
-  },
+  } catch (error) {
+    throw new Error(`Error deleting comment by id: ${error.message}`);
+  }
 };
 
-module.exports = commentcont;
+module.exports = {
+  createComment,
+  getAllComments,
+  deleteAllComments,
+  getCommentById,
+  updateComment,
+  deleteCommentById,
+};

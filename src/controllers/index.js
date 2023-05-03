@@ -1,6 +1,9 @@
-const comment = require ("../controllers/comment.controller");
-const user = require ("../controllers/user.controller");
+const comment = require("./comment.controller");
+const user = require("./user.controller");
+const post = require("./post.controller");
+
 module.exports= {
     comment,
-    user
+    user,
+    post
 };
