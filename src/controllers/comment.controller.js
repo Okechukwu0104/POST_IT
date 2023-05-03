@@ -71,7 +71,6 @@ const commentcont = {
           $pull: { comments: req.params.id },
         }
       );
-
       res.json({ msg: "Deleted Comment!" });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
