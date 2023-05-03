@@ -7,6 +7,7 @@ router.post("/User", async (req, res) => {
     username: req.body.username,
     firstname: req.body.firstname,
     email: req.body.email,
+    password: req.body.password 
   };
 
   const user = new User(newUser);
@@ -17,6 +18,8 @@ router.post("/User", async (req, res) => {
     user,
   });
   try {
+    const savedUser = await user.save ();
+    res.send (saveduser)
   } catch (error) {
     throw new error(`error creating a user ${error.message}`);
   }
