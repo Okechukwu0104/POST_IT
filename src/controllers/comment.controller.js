@@ -1,4 +1,4 @@
-
+const { User, Post, Comment } = require('../models');
 
 const createComment = async function (req, res) {
   try {
@@ -7,9 +7,10 @@ const createComment = async function (req, res) {
     throw new Error(`Error creating comment: ${error.message}`);
   }
 };
+
 const getAllComments = async function (req, res) {
   try {
-
+    
   } catch (error) {
     throw new Error(`Error getting all comments: ${error.message}`);
   }
