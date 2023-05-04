@@ -1,82 +1,54 @@
-const Comments = require("../models/commentModel");
-const Posts = require("../models/postModel");
+const { User, Post, Comment } = require('../models');
 
-const commentcont = {
-  postComment: async (req, res) => {
-    try {
-      const { postId, content, tag, reply, postUserId } = req.body;
+const createComment = async function (req, res) {
+  try {
 
-      const post = await Posts.findById(postId);
-      if (!post)
-        return res.status(400).json({ msg: "This post does not exist." });
-
-      if (reply) {
-        const cm = await Comments.findById(reply);
-        if (!cm)
-          return res.status(400).json({ msg: "This comment does not exist." });
-      }
-
-      const newComment = new Comments({
-        user: req.user._id,
-        content,
-        tag,
-        reply,
-        postUserId,
-        postId,
-      });
-
-      await Posts.findOneAndUpdate(
-        { _id: postId },
-        {
-          $push: { comments: newComment._id },
-        },
-        { new: true }
-      );
-
-      await newComment.save();
-
-      res.json({ newComment });
-    } catch (err) {
-      return res.status(500).json({ msg: err.message });
-    }
-  },
-  putComment: async (req, res) => {
-    try {
-      const { content } = req.body;
-
-      await Comments.findOneAndUpdate(
-        {
-          _id: req.params.id,
-          user: req.user._id,
-        },
-        { content }
-      );
-
-      res.json({ msg: "Update Success!" });
-    } catch (err) {
-      return res.status(500).json({ msg: err.message });
-    }
-  },
-
-  deleteComment: async (req, res) => {
-    try {
-      const comment = await Comments.findOneAndDelete({
-        _id: req.params.id,
-        $or: [{ user: req.user._id }, { postUserId: req.user._id }],
-      });
-
-      await Posts.findOneAndUpdate(
-        { _id: comment.postId },
-        {
-          $pull: { comments: req.params.id },
-        }
-      );
-
-      res.json({ msg: "Deleted Comment!" });
-    } catch (err) {
-      return res.status(500).json({ msg: err.message });
-    }
-  },
+  } catch (error) {
+    throw new Error(`Error creating comment: ${error.message}`);
+  }
 };
 
-module.exports = commentcont;
+const getAllComments = async function (req, res) {
+  try {
+    
+  } catch (error) {
+    throw new Error(`Error getting all comments: ${error.message}`);
+  }
+};
+const deleteAllComments = async function (req, res) {
+  try {
+
+  } catch (error) {
+    throw new Error(`Error deleting all comments: ${error.message}`);
+  }
+};
+const getCommentById = async function (req, res) {
+  try {
+
+  } catch (error) {
+    throw new Error(`Error getting comment by id: ${error.message}`);
+  }
+};
+const updateComment = async function (req, res) {
+  try {
+
+  } catch (error) {
+    throw new Error(`Error updating comment by id: ${error.message}`);
+  }
+};
+const deleteCommentById = async function (req, res) {
+  try {
+
+  } catch (error) {
+    throw new Error(`Error deleting comment by id: ${error.message}`);
+  }
+};
+
+module.exports = {
+  createComment,
+  getAllComments,
+  deleteAllComments,
+  getCommentById,
+  updateComment,
+  deleteCommentById,
+};

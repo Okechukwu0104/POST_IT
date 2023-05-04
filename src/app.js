@@ -1,7 +1,12 @@
 const express = require("express");
-const{handler} = require('./errors');
+const { handler, error404 } = require('./errors');
+const comment = require('./routes/comment.route');
+const post = require('./routes/post.route');
+const user = require('./routes/user.route');
 const app = express();
-const router = require("./routes/user.route");
+
+
+
 
 //let us call some inbuilt express wares
 
@@ -24,7 +29,10 @@ app.use((req, res, next) => {
 });
 
 //error handlers
+app.use("/api/comments", comment);
+app.use("/api/posts", post);
+app.use("/api/users", user);
+app.use("*", error404);
 app.use(handler);
-app.use("/api", router)
 
 module.exports = app;

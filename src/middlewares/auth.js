@@ -1,3 +1,4 @@
+
  const User = require("../models/user");
   
   module.exports.protect = async (req, res, next) => {
@@ -29,3 +30,4 @@
       });
     }
   };
+
