@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { protect } = require('../middlewares/auth');
 const { post } = require('../controllers')
 
 
-router.post('/', protect, post.createPost)
+router.post('/', post.createPost)
 router.get('/', post.getAllPosts)
 router.delete('/', post.deleteAllPosts)
 
