@@ -1,4 +1,3 @@
-const { comment, comment } = require(".");
 const { User, Post, Comment } = require("../models");
 const { updateMany } = require("../models/comment.model");
 const { findById } = require("../models/comment.model");
