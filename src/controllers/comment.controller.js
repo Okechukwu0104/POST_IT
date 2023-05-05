@@ -7,14 +7,14 @@ const createComment = async function (req, res) {
     const newComment = {
       content: req.body.content,
       author: req.body.author,
-      post: req.body.post,
+      post: req.body.post
     };
     const comment = new Comment(newComment);
     await comment.save();
 
     return res.status(201).json({
       success: true,
-      Comment: Comment,
+      Comment,
     });
   } catch (error) {
     throw new Error(`Error creating comment: ${error.message}`);
@@ -38,8 +38,8 @@ const deleteAllComments = async function (req, res) {
     const deleteAllComments = await Comment.deleteMany({});
     return res.status(200).json({
       success: true,
-      deleteAllComments: deleteAllComments,
-    });
+      deleteAllComments: deleteAllComments
+    })
   } catch (error) {
     throw new Error(`Error deleting all comments: ${error.message}`);
   }
@@ -47,7 +47,7 @@ const deleteAllComments = async function (req, res) {
 
 const getCommentById = async function (req, res) {
   try {
-    const commentId = req.params.commentId(commentId);
+    const commentId = req.params.commentId;
     const comment = await Comment.findById(comment);
     if (!comment) {
       return res.status(404).json({
